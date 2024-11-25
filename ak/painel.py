@@ -12,7 +12,8 @@ painel = Blueprint('painel', __name__, url_prefix='/')
 # Rota para exibir todas as listas (List)
 @painel.route('/')
 def index():
-    #data = model.list_all_lists()
+    data = model.list_all_base()
+    print(data)
     #return render_template('painel/index.html' , data=data)
     return "<h1>bem vindo</h1><a href='criar/'>entrar</a>"
 
