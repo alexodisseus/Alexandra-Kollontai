@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-# Definindo o modelo Lista
 class Base_dados(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(120), unique=True, nullable=False)
@@ -23,3 +22,22 @@ def list_all_base():
     bases = Base_dados.query.all()
     return bases
 
+def get_id_base(id):
+    # modificar para buscar po id
+    data = Base_dados.query.all()
+    return data
+
+
+def create_new_base(nome , description , tag , active):
+    
+    novo_item = Base_dados(
+        nome=nome,
+        description=description,
+        tag=tag,
+        active=active,
+        data_create=datetime.utcnow().date()  # O campo `data_create` será gerado automaticamente pelo modelo
+    )
+
+    # Adicionando ao banco de dados
+    db.session.add(novo_item)
+    db.session.commit()
